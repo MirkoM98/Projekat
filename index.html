@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VirtualFridge!</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="images/fridge.png" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    /> -->
+  </head>
+  <body>
+    <div id="main">
+      <div id="frizider">
+        <img src="images/closed.png" alt="" id="fridgeopen" />
+        <div class="heading">
+          <h2>
+            Welcome to your own VirtualFridge! Save your ingredients and make
+            tasty meals with online recipes!
+          </h2>
+        </div>
+
+        <div id="form" class="form">
+          <form class="box" action="index.html" method="post">
+            <a href="#" id="formlogin">Login </a> <span id="spacer">|</span>
+            <a href="#" id="formregister">Register</a>
+            <div id="error"></div>
+            <input type="text" name="" placeholder="Username" id="username" />
+            <input
+              type="text"
+              name=""
+              placeholder="E-mail"
+              id="email"
+              class="hidden"
+            />
+            <input
+              type="password"
+              name=""
+              placeholder="Password"
+              id="password"
+            />
+            <input type="button" name="" value="Login" id="login" />
+            <input
+              type="button"
+              name=""
+              value="Register"
+              id="register"
+              class="hidden"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+    <script></script>
+    <script async src="script.js"></script>
+  </body>
+</html>

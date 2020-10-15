@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #7d7e7d; /* Old browsers */
+  background: -moz-radial-gradient(
+    center,
+    ellipse cover,
+    #7d7e7d 0%,
+    #0e0e0e 100%
+  ); /* FF3.6-15 */
+  background: -webkit-radial-gradient(
+    center,
+    ellipse cover,
+    #7d7e7d 0%,
+    #0e0e0e 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(
+    ellipse at center,
+    #7d7e7d 0%,
+    #0e0e0e 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 );
+}
+
+#main {
+  width: 100%;
+  text-align: right;
+
+  height: auto;
+}
+#fridgeopen {
+  width: 1000px;
+}
+#frizider {
+  position: relative;
+  margin: 0 auto;
+  width: 1000px;
+}
+.heading {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 300px;
+  text-align: center;
+}
+.select {
+  color: white;
+}
+.notselect {
+  color: darkgrey;
+}
+.hidden {
+  display: none !important;
+}
+#spacer {
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+}
+#formregister {
+  color: darkgrey;
+}
+/* FORM */
+p {
+  float: right;
+  color: lime;
+}
+#error {
+  color: red;
+  padding-bottom: 10px;
+}
+#form {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+.box {
+  width: 400px;
+  padding: 20px;
+  text-align: center;
+  background: #191919a8;
+  border-radius: 30px;
+}
+.box a {
+  color: white;
+  font-size: 30px;
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+.box a:hover {
+  color: gray;
+}
+.box input[type="text"],
+.box input[type="password"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box input[type="button"] {
+  border: 0;
+  background: none;
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box input[type="button"]:hover {
+  background: #2ecc71;
+}
