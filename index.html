@@ -16,8 +16,78 @@
   <body>
     <div id="main">
       <div id="frizider">
-        <img src="images/closed.png" alt="" id="fridgeopen" />
-        <div class="heading">
+        <img src="images/closed.png" alt="" id="fridgeclosed" />
+        <div id="plusmap" class="hidden">
+          <div class="plus" style="left: 90px; top: 160px">+</div>
+          <div class="plus" style="left: 160px; top: 160px">+</div>
+          <div class="plus" style="left: 254px; top: 192px">+</div>
+          <div class="plus" style="left: 309px; top: 192px">+</div>
+          <div class="plus" style="left: 364px; top: 192px">+</div>
+          <div class="plus" style="left: 465px; top: 160px">+</div>
+          <div class="plus" style="left: 520px; top: 160px">+</div>
+          <div class="plus" style="left: 575px; top: 160px">+</div>
+          <div class="plus" style="left: 630px; top: 160px">+</div>
+          <div class="plus" style="left: 90px; top: 330px">+</div>
+          <div class="plus" style="left: 160px; top: 330px">+</div>
+          <div class="plus" style="left: 254px; top: 310px">+</div>
+          <div class="plus" style="left: 309px; top: 310px">+</div>
+          <div class="plus" style="left: 364px; top: 310px">+</div>
+          <div class="plus" style="left: 254px; top: 378px">+</div>
+          <div class="plus" style="left: 309px; top: 378px">+</div>
+          <div class="plus" style="left: 364px; top: 378px">+</div>
+          <div class="plus" style="left: 465px; top: 395px">+</div>
+          <div class="plus" style="left: 520px; top: 395px">+</div>
+          <div class="plus" style="left: 575px; top: 395px">+</div>
+          <div class="plus" style="left: 630px; top: 395px">+</div>
+          <div class="plus" style="left: 480px; top: 250px">+</div>
+          <div class="plus" style="left: 550px; top: 250px">+</div>
+          <div class="plus" style="left: 620px; top: 250px">+</div>
+          <div class="plus" style="left: 255px; top: 452px">+</div>
+          <div class="plus" style="left: 310px; top: 452px">+</div>
+          <div class="plus" style="left: 365px; top: 452px">+</div>
+          <div class="plus" style="left: 255px; top: 520px">+</div>
+          <div class="plus" style="left: 310px; top: 520px">+</div>
+          <div class="plus" style="left: 365px; top: 520px">+</div>
+          <div class="plus" style="left: 255px; top: 590px">+</div>
+          <div class="plus" style="left: 310px; top: 590px">+</div>
+          <div class="plus" style="left: 365px; top: 590px">+</div>
+          <div class="plus" style="left: 465px; top: 510px">+</div>
+          <div class="plus" style="left: 520px; top: 510px">+</div>
+          <div class="plus" style="left: 575px; top: 510px">+</div>
+          <div class="plus" style="left: 630px; top: 510px">+</div>
+          <div class="plus" style="left: 465px; top: 630px">+</div>
+          <div class="plus" style="left: 520px; top: 630px">+</div>
+          <div class="plus" style="left: 575px; top: 630px">+</div>
+          <div class="plus" style="left: 630px; top: 630px">+</div>
+          <div class="plus" style="left: 90px; top: 630px">+</div>
+          <div class="plus" style="left: 160px; top: 630px">+</div>
+          <div class="plus" style="left: 255px; top: 666px">+</div>
+          <div class="plus" style="left: 310px; top: 666px">+</div>
+          <div class="plus" style="left: 365px; top: 666px">+</div>
+          <div class="plus" style="left: 482px; top: 755px">+</div>
+          <div class="plus" style="left: 551px; top: 755px">+</div>
+          <div class="plus" style="left: 620px; top: 755px">+</div>
+          <div class="plus" style="left: 482px; top: 870px">+</div>
+          <div class="plus" style="left: 551px; top: 870px">+</div>
+          <div class="plus" style="left: 620px; top: 870px">+</div>
+          <div class="plus" style="left: 270px; top: 760px">+</div>
+          <div class="plus" style="left: 335px; top: 760px">+</div>
+          <div class="plus" style="left: 270px; top: 865px">+</div>
+          <div class="plus" style="left: 335px; top: 865px">+</div>
+          <div class="plus" style="left: 725px; top: 190px">+</div>
+          <div class="plus" style="left: 785px; top: 190px">+</div>
+          <div class="plus" style="left: 845px; top: 190px">+</div>
+          <div class="plus" style="left: 725px; top: 380px">+</div>
+          <div class="plus" style="left: 785px; top: 380px">+</div>
+          <div class="plus" style="left: 845px; top: 380px">+</div>
+          <div class="plus" style="left: 725px; top: 578px">+</div>
+          <div class="plus" style="left: 785px; top: 578px">+</div>
+          <div class="plus" style="left: 845px; top: 578px">+</div>
+          <div id="items" class="hidden">
+            <input type="text" placeholder="Search groceries" id="searchgroceries">
+          </div>
+        </div>
+        <div id="heading">
           <h2>
             Welcome to your own VirtualFridge! Save your ingredients and make
             tasty meals with online recipes!
@@ -26,8 +96,10 @@
 
         <div id="form" class="form">
           <form class="box" action="index.html" method="post">
-            <a href="#" id="formlogin">Login </a> <span id="spacer">|</span>
-            <a href="#" id="formregister">Register</a>
+            <div id="formheading">
+              <a href="#" id="formlogin">Login </a> <span id="spacer">|</span>
+              <a href="#" id="formregister">Register</a>
+            </div>
             <div id="error"></div>
             <input type="text" name="" placeholder="Username" id="username" />
             <input
@@ -51,11 +123,25 @@
               id="register"
               class="hidden"
             />
+            <input
+              type="button"
+              name=""
+              value="Open Fridge"
+              id="openfridge"
+              class="hidden"
+            />
+            <input
+              type="button"
+              name=""
+              value="Logout"
+              id="logout"
+              class="hidden"
+            />
           </form>
         </div>
       </div>
     </div>
-    <script></script>
+
     <script async src="script.js"></script>
   </body>
 </html>

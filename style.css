@@ -22,12 +22,13 @@ body {
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 );
 }
-
 #main {
   width: 100%;
   text-align: right;
-
   height: auto;
+}
+#fridgeclosed {
+  width: 1000px;
 }
 #fridgeopen {
   width: 1000px;
@@ -37,7 +38,7 @@ body {
   margin: 0 auto;
   width: 1000px;
 }
-.heading {
+#heading {
   position: absolute;
   top: 30px;
   left: 30px;
@@ -62,10 +63,47 @@ body {
   color: darkgrey;
 }
 /* FORM */
-p {
-  float: right;
-  color: lime;
+.plus {
+  font-family: cursive;
+  height: 45px;
+  width: 45px;
+  position: absolute;
+  border: 2px dotted black;
+  border-radius: 7px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bolder;
+  color: darkgray;
+  line-height: 35px;
+  box-shadow: 1px 1px black;
+  text-shadow: 1px 1px black;
 }
+.plus:hover {
+  border: 3px solid black;
+  color: black;
+  cursor: pointer;
+}
+#plusmap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1000px;
+  height: 1050px;
+}
+#items {
+  width: 300px;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0.85);
+  position: absolute;
+  text-align: center;
+  border-radius: 10px;
+}
+#searchgroceries {
+  width: 200px;
+  padding: 5px;
+  margin: 10px;
+}
+
 #error {
   color: red;
   padding-bottom: 10px;
