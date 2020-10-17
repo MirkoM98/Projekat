@@ -26,7 +26,7 @@ function changelogin() {
   form_login.style.color = "white";
 }
 
-// korisnik (registracija i logovanje)
+// vise i ne znam sta je ovde
 var username = document.getElementById("username");
 var email = document.getElementById("email");
 var password = document.getElementById("password");
@@ -38,7 +38,12 @@ var openfridge = document.getElementById("openfridge");
 var user = {};
 var users = [];
 var loggeduser = {};
-//
+var remove = document.getElementById("remove");
+var searchvalue = document.getElementById("searchgroceries").value;
+var items = document.getElementById("items");
+var slot = document.getElementsByClassName("plus");
+var add = document.getElementById("add");
+
 // LOGOUT
 var loggedin = JSON.parse(localStorage.getItem("logged_in"));
 logout.addEventListener("click", function () {
@@ -93,6 +98,18 @@ login.addEventListener("click", function () {
             .getElementById("formheading")
             .setAttribute("class", "hidden");
           error.style.fontSize = "40px";
+          error.innerHTML = `Welcome ${getloggedname}!`;
+          error.style.color = "lime";
+          login.setAttribute("class", "hidden");
+          username.setAttribute("class", "hidden");
+          password.setAttribute("class", "hidden");
+          logout.removeAttribute("class");
+          openfridge.removeAttribute("class");
+          document
+            .getElementById("formheading")
+            .setAttribute("class", "hidden");
+          error.style.fontSize = "40px";
+
           return;
         } else if (pulldata[i].name == name && pulldata[i].password != pass) {
           username.style.borderColor = "lime";
@@ -108,14 +125,19 @@ login.addEventListener("click", function () {
 });
 
 //REGISTROVANJE
+function getdata() {
+  var getdata = localStorage.getItem("users");
+  var userdata = JSON.parse(getdata);
+  return userdata;
+}
 register.addEventListener("click", function () {
   var name = username.value;
   var mail = email.value;
   var pass = password.value;
   error.innerHTML = "";
   error.style.color = "red";
-  //username
 
+  //proveri username
   if (name == "") {
     error.innerHTML += `Username field empty!<br>`;
     username.style.borderColor = "red";
@@ -146,7 +168,7 @@ register.addEventListener("click", function () {
       }
     }
   }
-  //email
+  //proveri email
   if (mail == "") {
     error.innerHTML += `Email field empty!<br>`;
     email.style.borderColor = "red";
@@ -163,7 +185,7 @@ register.addEventListener("click", function () {
     email.style.borderColor = "lime";
     var mailcheck = true;
   }
-  //password
+  //proveri password
   var number = 0;
   var capitalletter = 0;
   var smallletter = 0;
@@ -200,11 +222,19 @@ register.addEventListener("click", function () {
     password.style.borderColor = "lime";
   }
 
-  //check form and add user to local storage
+  //proveri formu i ubaci korisnika u storage
   if (namecheck && mailcheck && passwordcheck) {
     user.name = name;
     user.email = mail;
     user.password = pass;
+    user.groceries = [];
+    for (i = 0; i < slot.length; i++) {
+      var entry = {
+        name: "",
+      };
+
+      user.groceries.push(entry);
+    }
     if (userdata != null) {
       console.log(userdata);
       userdata.push(user);
@@ -218,18 +248,18 @@ register.addEventListener("click", function () {
     password.value = "";
     error.innerHTML = `Success! Please log in`;
     error.style.color = "lime";
+    // buildstorage();
   }
 });
 
-function getdata() {
-  var getdata = localStorage.getItem("users");
-  var userdata = JSON.parse(getdata);
-  return userdata;
-}
-
-//open fridge
-
+//otvori frizider i ispisi sva polja
 openfridge.addEventListener("click", function () {
+  var getloggeduser = sessionStorage.getItem("logged_in");
+  var parsename = JSON.parse(getloggeduser);
+  var getloggedname = parsename.name;
+  var getusers = JSON.parse(localStorage.getItem("users"));
+  var existingusers = getusers.find((x) => x.name === `${getloggedname}`);
+  var groceries = existingusers.groceries;
   var form = document.getElementById("form");
   form.style.position = "fixed";
   form.style.top = "0";
@@ -245,76 +275,64 @@ openfridge.addEventListener("click", function () {
   fridge.setAttribute("id", "fridgeopen");
   document.getElementById("heading").setAttribute("class", "hidden");
   document.getElementById("plusmap").removeAttribute("class");
-  // resizemap();
-});
+  var background = document.getElementById("main");
 
-// function resizemap() {
-//   var ImageMap = function (map, img) {
-//           var n,
-//               areas = map.getElementsByTagName('area'),
-//               len = areas.length,
-//               coords = [],
-//               previousWidth = 1628;
-//           for (n = 0; n < len; n++) {
-//               coords[n] = areas[n].coords.split(',');
-//           }
-//           this.resize = function () {
-//               var n, m, clen,
-//                   x = img.offsetWidth / previousWidth;
-//               for (n = 0; n < len; n++) {
-//                   clen = coords[n].length;
-//                   for (m = 0; m < clen; m++) {
-//                       coords[n][m] *= x;
-//                   }
-//                   areas[n].coords = coords[n].join(',');
-//               }
-//               previousWidth = document.body.clientWidth;
-//               return true;
-//           };
-//           window.onresize = this.resize;
-//       },
-//       imageMap = new ImageMap(document.getElementById('map_ID'), document.getElementById('fridgeopen'));
-//   imageMap.resize();
-//   return;
-// }
-// var areas = document.getElementsByTagName( 'area' );
-// for( var i = 0; i < areas.length; i++ ) {
-//     areas[i].addEventListener( 'mouseover', function () {this.focus();}, false );
-//     areas[i].addEventListener( 'mouseout', function () {this.blur();}, false );
-// };
+  //ispisi meni za namirnice
+  for (let i = 0; i < slot.length; i++) {
+    slot[i].addEventListener("click", function (event) {
+      var top = slot[i].style.top;
+      var parsetop = parseInt(top, 10);
+      var left = slot[i].style.left;
+      var parseleft = parseInt(left, 10);
+      if (parsetop >= 400) {
+        items.style.top = `${450}px`;
+        items.style.left = `${parseleft + 50}px`;
+      } else {
+        items.style.top = `${parsetop + 50}px`;
+        items.style.left = `${parseleft + 50}px`;
+      }
+      returni = function () {
+        return i;
+      };
 
-//show groceries menu
-var items = document.getElementById("items");
-var slot = document.getElementsByClassName("plus");
-for (let i = 0; i < slot.length; i++) {
-  slot[i].setAttribute("id", `${i}`);
-  slot[i].addEventListener("click", function (event) {
-    var top = slot[i].style.top;
-    var parsetop = parseInt(top, 10);
-    var left = slot[i].style.left;
-    var parseleft = parseInt(left, 10);
-    if (parsetop >= 400){
-      items.style.top = `${450}px`;
-      items.style.left = `${parseleft + 50}px`;
-    } else {
-    items.style.top = `${parsetop + 50}px`;
-    items.style.left = `${parseleft + 50}px`;
+      items.removeAttribute("class");
+      event.stopPropagation();
+    });
   }
-    items.removeAttribute("class");
-    event.stopPropagation();
+  background.addEventListener("click", function () {
+    items.setAttribute("class", "hidden");
   });
-}
-var background = document.getElementById("main");
-background.addEventListener("click", function () {
-  items.setAttribute("class", "hidden");
+  items.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+
+  // //dodaj item u polje i storage
+  add.addEventListener("click", function () {
+    groceries[returni()].name = `${searchvalue}`;
+    displayitem();
+    store = JSON.stringify(getusers);
+    localStorage.setItem("users", store);
+  });
+
+  //remove item iz storage-a
+  remove.addEventListener("click", function () {
+    groceries[returni()].name = ``;
+    displayitem();
+    slot[returni()].innerHTML = "+";
+    store = JSON.stringify(getusers);
+
+    localStorage.setItem("users", store);
+  });
+
+  //pokupi sacuvane iteme iz storiga u frizider
+  var existingusers = getusers.find((x) => x.name === `${getloggedname}`);
+  var groceries = existingusers.groceries;
+  for (i = 0; i < groceries.length; i++) {
+    if (groceries[i].name != "") {
+      slot[i].innerHTML = `${groceries[i].name}`;
+    }
+  }
+  function displayitem() {
+    slot[returni()].innerHTML = `${groceries[returni()].name}`;
+  }
 });
-items.addEventListener("click", function (e) {
-  e.stopPropagation();
-});
-// var slotid = document.getElementById(`slot${i}`)
-//   slotid.addEventListener("click", function(){
-//     var top = slotid.style.top;
-//     var left = slotid.style.left;
-//     cosnsole.log(top,left);
-//   })
-// }
