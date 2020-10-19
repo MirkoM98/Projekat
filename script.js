@@ -26,7 +26,6 @@ function changelogin() {
   form_login.style.color = "white";
 }
 
-// vise i ne znam sta je ovde
 var username = document.getElementById("username");
 var email = document.getElementById("email");
 var password = document.getElementById("password");
@@ -39,10 +38,10 @@ var user = {};
 var users = [];
 var loggeduser = {};
 var remove = document.getElementById("remove");
-var searchvalue = document.getElementById("searchgroceries").value;
+var displaygroceries = document.getElementById("groceries");
+
 var items = document.getElementById("items");
 var slot = document.getElementsByClassName("plus");
-var add = document.getElementById("add");
 
 // LOGOUT
 var loggedin = JSON.parse(localStorage.getItem("logged_in"));
@@ -98,7 +97,7 @@ login.addEventListener("click", function () {
             .getElementById("formheading")
             .setAttribute("class", "hidden");
           error.style.fontSize = "40px";
-          error.innerHTML = `Welcome ${getloggedname}!`;
+          error.innerHTML = `Welcome ${loggeduser.name}!`;
           error.style.color = "lime";
           login.setAttribute("class", "hidden");
           username.setAttribute("class", "hidden");
@@ -231,12 +230,12 @@ register.addEventListener("click", function () {
     for (i = 0; i < slot.length; i++) {
       var entry = {
         name: "",
+        image: "",
       };
 
       user.groceries.push(entry);
     }
     if (userdata != null) {
-      console.log(userdata);
       userdata.push(user);
       store = JSON.stringify(userdata);
     } else {
@@ -307,32 +306,80 @@ openfridge.addEventListener("click", function () {
   });
 
   // //dodaj item u polje i storage
-  add.addEventListener("click", function () {
-    groceries[returni()].name = `${searchvalue}`;
-    displayitem();
-    store = JSON.stringify(getusers);
-    localStorage.setItem("users", store);
-  });
 
-  //remove item iz storage-a
+  // remove item iz storage-a
   remove.addEventListener("click", function () {
     groceries[returni()].name = ``;
-    displayitem();
+    groceries[returni()].image = ``;
+    displayitem(returni());
     slot[returni()].innerHTML = "+";
     store = JSON.stringify(getusers);
-
     localStorage.setItem("users", store);
   });
 
   //pokupi sacuvane iteme iz storiga u frizider
   var existingusers = getusers.find((x) => x.name === `${getloggedname}`);
   var groceries = existingusers.groceries;
-  for (i = 0; i < groceries.length; i++) {
+  for (let i = 0; i < groceries.length; i++) {
     if (groceries[i].name != "") {
-      slot[i].innerHTML = `${groceries[i].name}`;
+      displayitem(i);
     }
   }
-  function displayitem() {
-    slot[returni()].innerHTML = `${groceries[returni()].name}`;
+
+  function getsearch() {
+    var searchvalue = document.getElementById("searchgroceries").value;
+    return searchvalue.replace(/\s+/g, "-").toLowerCase();
   }
+  function displayitem(x) {
+    x = x;
+    slot[
+      x
+    ].innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${groceries[x].image}" style="height:45px;width:45px;border-radius:7px">`;
+  }
+  // 08f731bc20da4bd1b19fb4aaaa591b23 mirketna key // mirkomail key bac1eba564884223a0dbdb9605cedef5 // bojke key e929b96d042449e69c91ba672d69c79f
+  document
+    .getElementById("searchgroceries")
+    .addEventListener("keypress", function () {
+      if (event.keyCode === 13) {
+      fetch(
+        `https://api.spoonacular.com/food/ingredients/autocomplete?query=${getsearch()}&number=10&apiKey=08f731bc20da4bd1b19fb4aaaa591b23`,
+        {
+          method: "GET",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          var items = data;
+          console.log(items);
+          displaygroceries.innerHTML = "";
+
+          for (let i = 0; i < items.length; i++) {
+            var button = document.createElement("button");
+            button.innerHTML = "+";
+            button.addEventListener("click", additem);
+            var food = document.createElement("div");
+            food.innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${items[i].image}" style="height:50px;width:50px;"><p>${items[i].name}</p>`;
+
+            displaygroceries.appendChild(food);
+            displaygroceries.appendChild(button);
+            function additem() {
+              var checkgroceries = groceries.find(
+                (x) => x.name === `${items[i].name}`
+              );
+              if (checkgroceries != null) {
+                alert(`You already have ${items[i].name}`);
+              } else {
+                groceries[returni()].name = `${items[i].name}`;
+                groceries[returni()].image = `${items[i].image}`;
+                store = JSON.stringify(getusers);
+                localStorage.setItem("users", store);
+                displayitem(returni());
+              }
+            }
+          }
+        });
+      }
+    });
 });
+
+// api key ?apiKey=bac1eba564884223a0dbdb9605cedef5
