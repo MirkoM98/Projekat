@@ -39,9 +39,10 @@ var users = [];
 var loggeduser = {};
 var remove = document.getElementById("remove");
 var displaygroceries = document.getElementById("groceries");
-
+var plusmap = document.getElementById("plusmap");
 var items = document.getElementById("items");
 var slot = document.getElementsByClassName("plus");
+var heading = document.getElementById("heading");
 
 // LOGOUT
 var loggedin = JSON.parse(localStorage.getItem("logged_in"));
@@ -252,7 +253,10 @@ register.addEventListener("click", function () {
 });
 
 //otvori frizider i ispisi sva polja
-openfridge.addEventListener("click", function () {
+openfridge.addEventListener("click", openthefridge);
+function openthefridge() {
+  var showrecipes = document.getElementById("showrecipe");
+  showrecipes.setAttribute("class", "hidden");
   var getloggeduser = sessionStorage.getItem("logged_in");
   var parsename = JSON.parse(getloggeduser);
   var getloggedname = parsename.name;
@@ -270,15 +274,19 @@ openfridge.addEventListener("click", function () {
   openfridge.setAttribute("class", "hidden");
   var fridge = document.getElementById("fridgeclosed");
   fridge.setAttribute("src", "Images/open.png");
-  fridge.setAttribute("usemap", "#map");
-  fridge.setAttribute("id", "fridgeopen");
-  document.getElementById("heading").setAttribute("class", "hidden");
-  document.getElementById("plusmap").removeAttribute("class");
+
+  heading.setAttribute("class", "hidden");
+  plusmap.removeAttribute("class");
   var background = document.getElementById("main");
 
   //ispisi meni za namirnice
   for (let i = 0; i < slot.length; i++) {
     slot[i].addEventListener("click", function (event) {
+      var grocerielist = document.getElementById("groceries");
+      grocerielist.innerHTML = "";
+      var searchvalue = document.getElementById("searchgroceries");
+      searchvalue.value = "";
+
       var top = slot[i].style.top;
       var parsetop = parseInt(top, 10);
       var left = slot[i].style.left;
@@ -337,49 +345,145 @@ openfridge.addEventListener("click", function () {
     ].innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${groceries[x].image}" style="height:45px;width:45px;border-radius:7px">`;
   }
   // 08f731bc20da4bd1b19fb4aaaa591b23 mirketna key // mirkomail key bac1eba564884223a0dbdb9605cedef5 // bojke key e929b96d042449e69c91ba672d69c79f
+  //trazi namirnice preko api i ispisi
   document
     .getElementById("searchgroceries")
     .addEventListener("keypress", function () {
       if (event.keyCode === 13) {
-      fetch(
-        `https://api.spoonacular.com/food/ingredients/autocomplete?query=${getsearch()}&number=10&apiKey=08f731bc20da4bd1b19fb4aaaa591b23`,
-        {
-          method: "GET",
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          var items = data;
-          console.log(items);
-          displaygroceries.innerHTML = "";
+        fetch(
+          `https://api.spoonacular.com/food/ingredients/autocomplete?query=${getsearch()}&number=10&apiKey=e929b96d042449e69c91ba672d69c79f`,
+          {
+            method: "GET",
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            var items = data;
 
-          for (let i = 0; i < items.length; i++) {
-            var button = document.createElement("button");
-            button.innerHTML = "+";
-            button.addEventListener("click", additem);
-            var food = document.createElement("div");
-            food.innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${items[i].image}" style="height:50px;width:50px;"><p>${items[i].name}</p>`;
+            displaygroceries.innerHTML = "";
 
-            displaygroceries.appendChild(food);
-            displaygroceries.appendChild(button);
-            function additem() {
-              var checkgroceries = groceries.find(
-                (x) => x.name === `${items[i].name}`
-              );
-              if (checkgroceries != null) {
-                alert(`You already have ${items[i].name}`);
-              } else {
-                groceries[returni()].name = `${items[i].name}`;
-                groceries[returni()].image = `${items[i].image}`;
-                store = JSON.stringify(getusers);
-                localStorage.setItem("users", store);
-                displayitem(returni());
+            for (let i = 0; i < items.length; i++) {
+              var button = document.createElement("button");
+              button.innerHTML = "+";
+              button.addEventListener("click", additem);
+              var food = document.createElement("div");
+              food.setAttribute("id", "food");
+              button.setAttribute("id", "addfood");
+              food.innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${items[i].image}" style="height:50px;width:50px;"><p>${items[i].name}</p>`;
+              food.appendChild(button);
+              displaygroceries.appendChild(food);
+
+              function additem() {
+                var checkgroceries = groceries.find(
+                  (x) => x.name === `${items[i].name}`
+                );
+                if (checkgroceries != null) {
+                  alert(`You already have ${items[i].name}`);
+                } else {
+                  groceries[returni()].name = `${items[i].name}`;
+                  groceries[returni()].image = `${items[i].image}`;
+
+                  store = JSON.stringify(getusers);
+                  localStorage.setItem("users", store);
+                  displayitem(returni());
+                }
               }
             }
-          }
-        });
+          });
       }
     });
-});
+
+  var imhungry = document.getElementById("imhungry");
+  var getrecipes = document.getElementById("getrecipe");
+  var checkboxes = document.querySelectorAll("input[type=checkbox]");
+  var choose = document.getElementById("choose");
+  imhungry.addEventListener("click", hungry);
+  var showrecipes = document.getElementById("showrecipe");
+  function hungry() {
+    getrecipes.removeAttribute("class");
+    imhungry.setAttribute("class", "hidden");
+    choose.removeAttribute("class");
+    plusmap.style.backgroundColor = "rgba(0, 0, 0, 0.658)";
+
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].setAttribute("id", `id${i}`);
+      slot[i].setAttribute("for", `id${i}`);
+    }
+  }
+  getrecipes.addEventListener("click", recipes);
+  function recipes() {
+    heading.removeAttribute("class");
+    imhungry.removeAttribute("class");
+    getrecipes.setAttribute("class", "hidden");
+    plusmap.style.backgroundColor = "";
+    var ingredientslong = "";
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked == true && groceries[i].name != "") {
+        ingredientslong += `${groceries[i].name},+`;
+      }
+
+      checkboxes[i].removeAttribute("id");
+      slot[i].removeAttribute("for");
+      slot[i].style.border = "";
+      checkboxes[i].checked = false;
+    }
+
+    var ingredientsspace = ingredientslong.slice(0, -2);
+    var ingredients = ingredientsspace.replace(/\s+/g, "-").toLowerCase();
+    console.log(ingredients);
+    fridge.setAttribute("src", "Images/closed.png");
+    plusmap.setAttribute("class", "hidden");
+    openfridge.removeAttribute("class");
+    showrecipe.removeAttribute("class");
+    choose.setAttribute("class", "hidden");
+    fetch(
+      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=e929b96d042449e69c91ba672d69c79f`,
+      {
+        method: "GET",
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        var recipes = data;
+        showrecipes.innerHTML = "";
+        console.log(recipes);
+        for (var i = 0; i < recipes.length; i++) {
+          var recipe = document.createElement("div");
+          recipe.setAttribute("id", "showrecipesmenu");
+
+          recipe.innerHTML = `<img src="${recipes[i].image}"><p>${recipes[i].title}</p>`;
+
+          showrecipes.appendChild(recipe);
+          returnx = function () {
+            return i;
+          };
+
+          recipe.addEventListener("click", addrecipe);
+          
+        }
+        function addrecipe() {
+          heading.innerHTML = "";
+          //                   KAKO DA UBACIM i OVDE!!??? VVV
+          fetch(
+            `https://api.spoonacular.com/recipes/${recipes[7].id}/analyzedInstructions?apiKey=bac1eba564884223a0dbdb9605cedef5`,
+            {
+              method: "GET",
+            }
+          )
+            .then((resp) => resp.json())
+            .then((data) => {
+              if (data.length < 1) {
+                heading.innerHTML =
+                  "<p>Sorry we couldn't find any instructions for this dish... :(</p>";
+              } else {
+                for (let j = 0; j < data[0].steps.length; j++) {
+                  heading.innerHTML += `<p><span>${data[0].steps[j].number}</span> : ${data[0].steps[j].step}</p><br>`;
+                }
+              }
+            });
+        }
+      });
+  }
+}
 
 // api key ?apiKey=bac1eba564884223a0dbdb9605cedef5

@@ -1,4 +1,5 @@
 body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -40,10 +41,74 @@ body {
 }
 #heading {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  width: 300px;
-  text-align: center;
+  top: 20px;
+  left: 20px;
+  width: 365px;
+  height: 540px;
+  text-align: left;
+  font-size: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+  
+
+}
+#heading > p{
+  color: rgb(255, 254, 254);
+  text-shadow: 5px 5px 5px black;
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid black;
+  
+}
+
+#openfridge {
+  height: 980px;
+  width: 100px;
+  position: absolute;
+  top: 200px;
+  left: 385px;
+  
+}
+
+#showrecipesmenu {
+  display: flex;
+  border-bottom: 1px solid black;
+  box-sizing: border-box;
+  
+}
+#showrecipesmenu:hover{
+  border: 1px solid black;
+  background-color: rgba(0, 0, 0, 0.411);
+  transition: 0.3s;
+  cursor: pointer;
+}
+#showrecipesmenu > img{
+ width: 120px;
+ height: 120px;
+ margin: 20px;
+ box-shadow: 5px 5px 10px black;
+}
+#showrecipesmenu > p{
+text-align: left;
+font-size: 25px;
+color: black;
+text-shadow: 1px 1px 40px black;
+padding:10px;
+}
+#openfridge:hover {
+  border: 3px solid rgb(173, 0, 0);
+  background-color: rgba(255, 0, 0, 0.363);
+  box-sizing: border-box;
+  border-radius: 10px;
+  transition: 0.1s;
+  
+}
+#showrecipe > input{
+  width: 450px;
+  margin: 15px 25px;
+  padding-top: 10px;
+
 }
 .select {
   color: white;
@@ -90,21 +155,92 @@ body {
   left: 0;
   width: 1000px;
   height: 1050px;
+  
+}
+#choose{
+  width: 500px;
+  height: 50px;
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+  color: white;
+  line-height: 60px;
+  text-shadow: 2px 2px 2px black;
+
+}
+#showrecipe{
+  width: 490px;
+  height: 1664px;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  overflow: auto;
+}
+input[type=checkbox] {
+  display: none;
+}
+label {
+  display:inline;
+
+}
+
+:checked + label {
+  border: 5px solid rgb(255, 0, 0);
+  box-shadow: 0 0 5px red;
+}
+#imhungry {
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.726);
+  text-align: center;
+  border-radius: 50px;
+  line-height: 50px;
+  color: red;
+  font-weight: bolder;
+  border: 2px solid red
+}
+#getrecipe{
+  position: absolute;
+  width: 170px;
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.726);
+  text-align: center;
+  border-radius: 50px;
+  line-height: 60px;
+  color: red;
+  font-weight: bolder;
+  border: 2px solid red
+}
+#imhungry:hover, #getrecipe:hover {
+  background-color: black;
+  border: 3px solid red;
 }
 #items {
   width: 300px;
   height: 500px;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.726);
   position: absolute;
   text-align: center;
-  border-radius: 10px;
+  overflow: auto;
+  border: 1px solid black;
+
 }
 #searchgroceries {
-  width: 150px;
+  width: 200px;
   padding: 5px;
   margin: 10px;
 }
-
+#groceries > *{
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  padding-top: 5px;
+}
+#groceries > #food{
+  border-top: 1px solid black;
+}
 #error {
   color: red;
   padding-bottom: 10px;
