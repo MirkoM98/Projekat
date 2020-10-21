@@ -1,8 +1,9 @@
 body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  box-sizing: border-box;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   background: #7d7e7d; /* Old browsers */
   background: -moz-radial-gradient(
     center,
@@ -28,16 +29,9 @@ body {
   text-align: right;
   height: auto;
 }
-#fridgeclosed {
-  width: 1000px;
-}
-#fridgeopen {
-  width: 1000px;
-}
 #frizider {
   position: relative;
   margin: 0 auto;
-  width: 1000px;
 }
 #heading {
   position: absolute;
@@ -45,21 +39,19 @@ body {
   left: 20px;
   width: 365px;
   height: 540px;
-  text-align: left;
+  text-align: center;
   font-size: 20px;
   box-sizing: border-box;
   overflow: auto;
-  
-
 }
-#heading > p{
+#heading > p {
   color: rgb(255, 254, 254);
   text-shadow: 5px 5px 5px black;
   font-weight: bold;
   font-size: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid black;
-  
+  text-align: left;
 }
 
 #openfridge {
@@ -68,33 +60,33 @@ body {
   position: absolute;
   top: 200px;
   left: 385px;
-  
+  cursor: pointer;
 }
 
 #showrecipesmenu {
   display: flex;
   border-bottom: 1px solid black;
   box-sizing: border-box;
-  
+  height: 150px;
+  align-items: center;
 }
-#showrecipesmenu:hover{
+#showrecipesmenu:hover {
   border: 1px solid black;
   background-color: rgba(0, 0, 0, 0.411);
   transition: 0.3s;
   cursor: pointer;
 }
-#showrecipesmenu > img{
- width: 120px;
- height: 120px;
- margin: 20px;
- box-shadow: 5px 5px 10px black;
+#showrecipesmenu > img {
+  height: 110px;
+  margin: 20px;
+  box-shadow: 5px 5px 10px black;
 }
-#showrecipesmenu > p{
-text-align: left;
-font-size: 25px;
-color: black;
-text-shadow: 1px 1px 40px black;
-padding:10px;
+#showrecipesmenu > p {
+  text-align: left;
+  font-size: 25px;
+  color: black;
+  text-shadow: 1px 1px 40px black;
+  padding: 10px;
 }
 #openfridge:hover {
   border: 3px solid rgb(173, 0, 0);
@@ -102,13 +94,11 @@ padding:10px;
   box-sizing: border-box;
   border-radius: 10px;
   transition: 0.1s;
-  
 }
-#showrecipe > input{
+#showrecipe > input {
   width: 450px;
   margin: 15px 25px;
   padding-top: 10px;
-
 }
 .select {
   color: white;
@@ -142,7 +132,12 @@ padding:10px;
   line-height: 35px;
   box-shadow: 1px 1px black;
   text-shadow: 1px 1px black;
-  
+  box-sizing: content-box;
+}
+.plus > img {
+  height: 45px;
+  width: 45px;
+  border-radius: 5px;
 }
 .plus:hover {
   border: 3px solid black;
@@ -155,67 +150,83 @@ padding:10px;
   left: 0;
   width: 1000px;
   height: 1050px;
-  
 }
-#choose{
-  width: 500px;
-  height: 50px;
+#choose {
+  width: 100%;
   position: absolute;
   text-align: center;
-  font-size: 30px;
+  font-size: 35px;
   color: white;
-  line-height: 60px;
-  text-shadow: 2px 2px 2px black;
-
+  text-shadow: 3px 3px 3px black;
 }
-#showrecipe{
-  width: 490px;
+#showrecipe {
+  width: 49%;
   height: 1664px;
-  background-color: rgba(0, 0, 0, 0);
   position: absolute;
   top: 20px;
   right: 20px;
   overflow: auto;
 }
-input[type=checkbox] {
+input[type="checkbox"] {
   display: none;
 }
 label {
-  display:inline;
-
+  display: inline;
 }
 
-:checked + label {
-  border: 5px solid rgb(255, 0, 0);
-  box-shadow: 0 0 5px red;
+:checked + .shad {
+  border: 5px solid rgba(255, 0, 0, 0.76);
+  box-shadow: 0 0 20px red;
+}
+.hover:hover {
+  cursor: pointer;
+  box-shadow: 0 0 20px 7px red;
+}
+.shad {
+  box-shadow: 0 0 20px -5px rgba(0, 255, 0, 0.473);
+}
+.shad > img {
+  background-color: white;
+}
+
+#searching {
+  width: 100%;
+  text-align: center;
+  margin-top: 100px;
 }
 #imhungry {
   position: absolute;
-  width: 150px;
+  width: 15%;
   height: 50px;
-  background-color: rgba(0, 0, 0, 0.726);
+  background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
   border-radius: 50px;
-  line-height: 50px;
-  color: red;
+  line-height: 40px;
+  color: rgb(255, 255, 255);
   font-weight: bolder;
-  border: 2px solid red
+  border: 2px solid maroon;
+  box-shadow: 0 0 10px maroon;
 }
-#getrecipe{
+#getrecipe {
   position: absolute;
-  width: 170px;
+  width: 18%;
   height: 60px;
-  background-color: rgba(0, 0, 0, 0.726);
+  background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
   border-radius: 50px;
-  line-height: 60px;
-  color: red;
+  line-height: 250%;
+  color: rgb(255, 255, 255);
   font-weight: bolder;
-  border: 2px solid red
+  border: 2px solid maroon;
+  box-shadow: 0 0 10px maroon;
 }
-#imhungry:hover, #getrecipe:hover {
+#imhungry:hover,
+#getrecipe:hover {
   background-color: black;
   border: 3px solid red;
+  box-shadow: 0 0 15px red;
+  cursor: pointer;
+  color: red;
 }
 #items {
   width: 300px;
@@ -224,22 +235,55 @@ label {
   position: absolute;
   text-align: center;
   overflow: auto;
-  border: 1px solid black;
-
+  border: 1px solid rgb(0, 0, 0);
+}
+#searchdiv {
+  display: flex;
+  padding: 5px;
+  justify-content: space-evenly;
+}
+#searchdiv > button {
+  background-color: rgba(0, 0, 0, 0.801);
+  color: white;
+  width: 15%;
+}
+#searchdiv > button:hover {
+  color: black;
+  background-color: rgb(235, 235, 235);
+  border: 2px solid black;
+  cursor: pointer;
 }
 #searchgroceries {
-  width: 200px;
+  width: 85%;
   padding: 5px;
-  margin: 10px;
+  text-align: center;
+  border: 2px solid black;
+  margin-right: 5px;
+  height: 40px;
 }
-#groceries > *{
+
+#groceries > * {
   display: flex;
-  justify-content: space-between;
-  margin: 5px;
-  padding-top: 5px;
+  justify-content: space-evenly;
 }
-#groceries > #food{
+#groceries > #food {
   border-top: 1px solid black;
+  height: 60px;
+  padding: 7px;
+}
+.searchp {
+  text-align: center;
+  width: 100%;
+
+  line-height: 200%;
+}
+
+#food > img {
+  width: 50px;
+}
+#food:hover {
+  background-color: rgba(169, 169, 169, 0.616);
+  cursor: pointer;
 }
 #error {
   color: red;
@@ -250,8 +294,29 @@ label {
   top: 50px;
   right: 50px;
 }
+#logoutfridge {
+  height: 40px;
+  width: 24%;
+  position: absolute;
+  top: 80px;
+  left: 460px;
+  background-color: rgba(0, 0, 0, 0.507);
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 2px black;
+  font-weight: bold;
+  border-top: 4px solid transparent;
+}
+#logoutfridge:hover {
+  background-color: rgb(0, 0, 0);
+  border: 4px solid maroon;
+  cursor: pointer;
+  color: red;
+  box-shadow: 0 0 15px red;
+}
 .box {
-  width: 400px;
+  width: 440px;
   padding: 20px;
   text-align: center;
   background: #191919a8;
@@ -266,6 +331,7 @@ label {
 }
 .box a:hover {
   color: gray;
+  cursor: pointer;
 }
 .box input[type="text"],
 .box input[type="password"] {
@@ -304,4 +370,5 @@ label {
 }
 .box input[type="button"]:hover {
   background: #2ecc71;
+  cursor: pointer;
 }

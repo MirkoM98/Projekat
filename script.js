@@ -32,7 +32,7 @@ var password = document.getElementById("password");
 var login = document.getElementById("login");
 var register = document.getElementById("register");
 var error = document.getElementById("error");
-var logout = document.getElementById("logout");
+var logoutclosed = document.getElementById("logout");
 var openfridge = document.getElementById("openfridge");
 var user = {};
 var users = [];
@@ -43,10 +43,14 @@ var plusmap = document.getElementById("plusmap");
 var items = document.getElementById("items");
 var slot = document.getElementsByClassName("plus");
 var heading = document.getElementById("heading");
+var logoutopened = document.getElementById("logoutfridge");
+var form = document.getElementById("form");
 
 // LOGOUT
 var loggedin = JSON.parse(localStorage.getItem("logged_in"));
-logout.addEventListener("click", function () {
+logoutopened.addEventListener("click", logout);
+logoutclosed.addEventListener("click", logout);
+function logout() {
   var ask = window.confirm(
     `Are you sure you want to log out ${username.value}?`
   );
@@ -59,7 +63,7 @@ logout.addEventListener("click", function () {
     sessionStorage.clear();
     window.location.reload();
   }
-});
+};
 
 //LOGOVANJE
 login.addEventListener("click", function () {
@@ -89,7 +93,7 @@ login.addEventListener("click", function () {
           login.setAttribute("class", "hidden");
           username.setAttribute("class", "hidden");
           password.setAttribute("class", "hidden");
-          logout.removeAttribute("class");
+          logoutclosed.removeAttribute("class");
           openfridge.removeAttribute("class");
           username.style.borderColor = "lime";
           form_login.removeEventListener("click", changelogin);
@@ -103,7 +107,7 @@ login.addEventListener("click", function () {
           login.setAttribute("class", "hidden");
           username.setAttribute("class", "hidden");
           password.setAttribute("class", "hidden");
-          logout.removeAttribute("class");
+          logoutclosed.removeAttribute("class");
           openfridge.removeAttribute("class");
           document
             .getElementById("formheading")
@@ -216,7 +220,7 @@ register.addEventListener("click", function () {
     password.style.borderColor = "red";
   } else if (number == 0 || capitalletter == 0 || smallletter == 0) {
     error.innerHTML += `Password must contain at least 1: number, capital letter, small letter!<br>`;
-    passwordcheck = false;
+    var passwordcheck = false;
   } else {
     var passwordcheck = true;
     password.style.borderColor = "lime";
@@ -255,6 +259,9 @@ register.addEventListener("click", function () {
 //otvori frizider i ispisi sva polja
 openfridge.addEventListener("click", openthefridge);
 function openthefridge() {
+  logoutfridge.removeAttribute("class");
+  form.setAttribute("class", "form hidden");
+  
   var showrecipes = document.getElementById("showrecipe");
   showrecipes.setAttribute("class", "hidden");
   var getloggeduser = sessionStorage.getItem("logged_in");
@@ -263,14 +270,19 @@ function openthefridge() {
   var getusers = JSON.parse(localStorage.getItem("users"));
   var existingusers = getusers.find((x) => x.name === `${getloggedname}`);
   var groceries = existingusers.groceries;
-  var form = document.getElementById("form");
   form.style.position = "fixed";
   form.style.top = "0";
   form.style.right = "0";
   error.style.display = "inline-block";
   error.style.padding = "20px";
-  error.innerHTML = `${username.value}`;
-  logout.style.display = "inline-block";
+  logoutopened.innerHTML = `Logged in: ${getloggedname}`;
+  logoutopened.addEventListener("mouseenter", function(){
+    logoutopened.innerHTML = "Click to logout";
+  });
+  logoutopened.addEventListener("mouseleave", function() {
+    logoutopened.innerHTML = `Logged in: ${getloggedname}`;
+  });
+
   openfridge.setAttribute("class", "hidden");
   var fridge = document.getElementById("fridgeclosed");
   fridge.setAttribute("src", "Images/open.png");
@@ -342,7 +354,7 @@ function openthefridge() {
     x = x;
     slot[
       x
-    ].innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${groceries[x].image}" style="height:45px;width:45px;border-radius:7px">`;
+    ].innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${groceries[x].image}" title="${groceries[x].name}">`;
   }
   // 08f731bc20da4bd1b19fb4aaaa591b23 mirketna key // mirkomail key bac1eba564884223a0dbdb9605cedef5 // bojke key e929b96d042449e69c91ba672d69c79f
   //trazi namirnice preko api i ispisi
@@ -351,7 +363,7 @@ function openthefridge() {
     .addEventListener("keypress", function () {
       if (event.keyCode === 13) {
         fetch(
-          `https://api.spoonacular.com/food/ingredients/autocomplete?query=${getsearch()}&number=10&apiKey=e929b96d042449e69c91ba672d69c79f`,
+          `https://api.spoonacular.com/food/ingredients/autocomplete?query=${getsearch()}&number=10&apiKey=08f731bc20da4bd1b19fb4aaaa591b23`,
           {
             method: "GET",
           }
@@ -363,14 +375,12 @@ function openthefridge() {
             displaygroceries.innerHTML = "";
 
             for (let i = 0; i < items.length; i++) {
-              var button = document.createElement("button");
-              button.innerHTML = "+";
-              button.addEventListener("click", additem);
               var food = document.createElement("div");
+              food.addEventListener("click", additem);
               food.setAttribute("id", "food");
-              button.setAttribute("id", "addfood");
-              food.innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${items[i].image}" style="height:50px;width:50px;"><p>${items[i].name}</p>`;
-              food.appendChild(button);
+
+              food.innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${items[i].image}"><div class="searchp"><p>${items[i].name}</p></div>`;
+
               displaygroceries.appendChild(food);
 
               function additem() {
@@ -399,6 +409,7 @@ function openthefridge() {
   var choose = document.getElementById("choose");
   imhungry.addEventListener("click", hungry);
   var showrecipes = document.getElementById("showrecipe");
+
   function hungry() {
     getrecipes.removeAttribute("class");
     imhungry.setAttribute("class", "hidden");
@@ -408,16 +419,25 @@ function openthefridge() {
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].setAttribute("id", `id${i}`);
       slot[i].setAttribute("for", `id${i}`);
+      if (slot[i].innerHTML != "+") {
+        slot[i].setAttribute("class", "plus hover shad");
+      } else {
+        slot[i].setAttribute("class", "plus hover");
+      }
     }
   }
   getrecipes.addEventListener("click", recipes);
   function recipes() {
+    showrecipes.innerHTML = "<div id='searching'><img src='Images/6.gif'></div>";
+    heading.innerHTML = "<p>Instructions are shown here!</p>";
     heading.removeAttribute("class");
     imhungry.removeAttribute("class");
     getrecipes.setAttribute("class", "hidden");
     plusmap.style.backgroundColor = "";
     var ingredientslong = "";
     for (let i = 0; i < checkboxes.length; i++) {
+      slot[i].setAttribute("class", "plus");
+      slot[i].style.borderColor = "black";
       if (checkboxes[i].checked == true && groceries[i].name != "") {
         ingredientslong += `${groceries[i].name},+`;
       }
@@ -430,14 +450,13 @@ function openthefridge() {
 
     var ingredientsspace = ingredientslong.slice(0, -2);
     var ingredients = ingredientsspace.replace(/\s+/g, "-").toLowerCase();
-    console.log(ingredients);
     fridge.setAttribute("src", "Images/closed.png");
     plusmap.setAttribute("class", "hidden");
     openfridge.removeAttribute("class");
     showrecipe.removeAttribute("class");
     choose.setAttribute("class", "hidden");
     fetch(
-      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number=10&apiKey=e929b96d042449e69c91ba672d69c79f`,
+      `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}&number&apiKey=08f731bc20da4bd1b19fb4aaaa591b23`,
       {
         method: "GET",
       }
@@ -445,45 +464,39 @@ function openthefridge() {
       .then((response) => response.json())
       .then((data) => {
         var recipes = data;
+        
         showrecipes.innerHTML = "";
-        console.log(recipes);
-        for (var i = 0; i < recipes.length; i++) {
+        for (let i = 0; i < recipes.length; i++) {
           var recipe = document.createElement("div");
-          recipe.setAttribute("id", "showrecipesmenu");
-
           recipe.innerHTML = `<img src="${recipes[i].image}"><p>${recipes[i].title}</p>`;
-
+          recipe.setAttribute("class", `show`);
+          recipe.setAttribute("id", "showrecipesmenu");
           showrecipes.appendChild(recipe);
-          returnx = function () {
-            return i;
-          };
-
-          recipe.addEventListener("click", addrecipe);
-          
         }
-        function addrecipe() {
-          heading.innerHTML = "";
-          //                   KAKO DA UBACIM i OVDE!!??? VVV
-          fetch(
-            `https://api.spoonacular.com/recipes/${recipes[7].id}/analyzedInstructions?apiKey=bac1eba564884223a0dbdb9605cedef5`,
-            {
-              method: "GET",
-            }
-          )
-            .then((resp) => resp.json())
-            .then((data) => {
-              if (data.length < 1) {
-                heading.innerHTML =
-                  "<p>Sorry we couldn't find any instructions for this dish... :(</p>";
-              } else {
-                for (let j = 0; j < data[0].steps.length; j++) {
-                  heading.innerHTML += `<p><span>${data[0].steps[j].number}</span> : ${data[0].steps[j].step}</p><br>`;
-                }
+
+        var recipeclass = document.getElementsByClassName(`show`);
+        for (let i = 0; i < recipeclass.length; i++) {
+          recipeclass[i].addEventListener("click", function () {
+            heading.innerHTML = "";
+            fetch(
+              `https://api.spoonacular.com/recipes/${recipes[i].id}/analyzedInstructions?apiKey=08f731bc20da4bd1b19fb4aaaa591b23`,
+              {
+                method: "GET",
               }
-            });
+            )
+              .then((resp) => resp.json())
+              .then((data) => {
+                if (data.length < 1) {
+                  heading.innerHTML =
+                    "<p>Sorry, we couldn't find any instructions for this dish... :(</p>";
+                } else {
+                  for (let j = 0; j < data[0].steps.length; j++) {
+                    heading.innerHTML += `<p><span>${data[0].steps[j].number}</span> : ${data[0].steps[j].step}</p><br>`;
+                  }
+                }
+              });
+          });
         }
       });
   }
 }
-
-// api key ?apiKey=bac1eba564884223a0dbdb9605cedef5

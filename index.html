@@ -6,25 +6,26 @@
     <title>VirtualFridge!</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/png" href="images/fridge.png" />
-    <!-- <link
+    <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
-    /> -->
+    />
   </head>
   <body>
     <div id="main">
-      <div id="frizider">
-        <img src="images/closed.png" alt="" id="fridgeclosed" />
+      <div id="frizider" style="width:1000px">
+        <img src="images/closed.png" alt="" id="fridgeclosed" style="width:1000px"/>
         <div id="openfridge" class="hidden"></div>
         <div id="showrecipe" class="hidden">
           <input type="text" class="hidden">
         </div>
         
         <div id="plusmap" class="hidden">
-          <div id="choose" class="hidden" style="left:200px;top:90px">Please choose your ingredients!</div>
+          <div id="choose" class="hidden">Please choose your ingredients!</div>
           <div id="imhungry"  style="left:65px;top:85px">I'm Hungry!</div>
+          <div id="logoutfridge" class="hidden"></div>
           <div id="getrecipe" class="hidden" style="left:740px;top:90px" >Get recipes!</div>
           <input type="checkbox">
           <label class="plus" style="left: 90px; top: 160px">+</label>
@@ -157,8 +158,10 @@
           <input type="checkbox">
           <label class="plus" style="left: 845px; top: 578px">+</label>
           <div id="items" class="hidden">
+            <div id="searchdiv">
             <input type="text" placeholder="Search groceries" id="searchgroceries">
             <button id="remove">X</button>
+          </div>
             <div id="groceries"></div>
           </div>
         </div>
