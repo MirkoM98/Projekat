@@ -1,7 +1,12 @@
-body {
+html {
+  font-size: 62, 5%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  font-size: 1.6rem;
+  
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   background: #7d7e7d; /* Old browsers */
@@ -35,32 +40,35 @@ body {
 }
 #heading {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 365px;
-  height: 540px;
+  top: 1%;
+  left: 2%;
+  width: 36%;
+  height: 30%;
   text-align: center;
-  font-size: 20px;
   box-sizing: border-box;
   overflow: auto;
+  font-size: 0.9rem;
 }
 #heading > p {
   color: rgb(255, 254, 254);
   text-shadow: 5px 5px 5px black;
   font-weight: bold;
-  font-size: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid black;
   text-align: left;
 }
+#heading > h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.452);
+  color: rgb(235, 235, 235);
+  text-shadow: 1px 1px 5px black;
+}
+#heading > h2 > span {
+  font-size: 1.8rem;
+  text-decoration: underline;
 
-#openfridge {
-  height: 980px;
-  width: 100px;
-  position: absolute;
-  top: 200px;
-  left: 385px;
-  cursor: pointer;
+  text-shadow: 0 0 30px white;
 }
 
 #showrecipesmenu {
@@ -77,26 +85,40 @@ body {
   cursor: pointer;
 }
 #showrecipesmenu > img {
-  height: 110px;
+  height: 60%;
   margin: 20px;
   box-shadow: 5px 5px 10px black;
 }
 #showrecipesmenu > p {
   text-align: left;
-  font-size: 25px;
+  font-size: 1rem;
   color: black;
   text-shadow: 1px 1px 40px black;
   padding: 10px;
 }
+#openfridge {
+  height: 56.5%;
+  width: 12%;
+  position: absolute;
+  top: 10.5%;
+  left: 37.5%;
+  cursor: pointer;
+}
+
 #openfridge:hover {
-  border: 3px solid rgb(173, 0, 0);
-  background-color: rgba(255, 0, 0, 0.363);
+  
+  background: linear-gradient(
+    90deg,
+    rgba(253, 0, 0, 0) 0%,
+    rgba(255, 0, 0, 0.729) 50%,
+    rgba(255, 0, 0, 0) 100%
+  );
   box-sizing: border-box;
   border-radius: 10px;
   transition: 0.1s;
 }
 #showrecipe > input {
-  width: 450px;
+  width: 40%;
   margin: 15px 25px;
   padding-top: 10px;
 }
@@ -109,27 +131,24 @@ body {
 .hidden {
   display: none !important;
 }
-#spacer {
-  color: white;
-  font-weight: bold;
-  font-size: 30px;
-}
+
 #formregister {
   color: darkgrey;
 }
 /* FORM */
 .plus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: cursive;
   height: 45px;
   width: 45px;
   position: absolute;
   border: 2px dotted black;
   border-radius: 7px;
-  text-align: center;
-  font-size: 40px;
+  font-size: 1.7rem;
   font-weight: bolder;
   color: darkgray;
-  line-height: 35px;
   box-shadow: 1px 1px black;
   text-shadow: 1px 1px black;
   box-sizing: content-box;
@@ -148,20 +167,20 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1000px;
-  height: 1050px;
+  width: 100%;
+  height: 100%;
 }
 #choose {
   width: 100%;
   position: absolute;
   text-align: center;
-  font-size: 35px;
   color: white;
   text-shadow: 3px 3px 3px black;
+  font-size: 1.5rem;
 }
 #showrecipe {
   width: 49%;
-  height: 1664px;
+  height: 90%;
   position: absolute;
   top: 20px;
   right: 20px;
@@ -172,6 +191,10 @@ input[type="checkbox"] {
 }
 label {
   display: inline;
+}
+.plus > img {
+  height: 100%;
+  width: 100%;
 }
 
 :checked + .shad {
@@ -195,30 +218,43 @@ label {
   margin-top: 100px;
 }
 #imhungry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   width: 15%;
-  height: 50px;
+  height: 5.5%;
   background-color: rgba(0, 0, 0, 0.5);
-  text-align: center;
   border-radius: 50px;
-  line-height: 40px;
   color: rgb(255, 255, 255);
   font-weight: bolder;
   border: 2px solid maroon;
   box-shadow: 0 0 10px maroon;
+  left: 6.5%;
+  top: 9%;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #getrecipe {
+  top: 9%;
+  left: 73.5%;
   position: absolute;
   width: 18%;
-  height: 60px;
+  height: 5.5%;
   background-color: rgba(0, 0, 0, 0.5);
-  text-align: center;
+
   border-radius: 50px;
   line-height: 250%;
   color: rgb(255, 255, 255);
   font-weight: bolder;
   border: 2px solid maroon;
   box-shadow: 0 0 10px maroon;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #imhungry:hover,
 #getrecipe:hover {
@@ -229,8 +265,8 @@ label {
   color: red;
 }
 #items {
-  width: 300px;
-  height: 500px;
+  width: 30%;
+  height: 80vh;
   background-color: rgba(255, 255, 255, 0.726);
   position: absolute;
   text-align: center;
@@ -238,27 +274,28 @@ label {
   border: 1px solid rgb(0, 0, 0);
 }
 #searchdiv {
+  width: 100%;
   display: flex;
-  padding: 5px;
-  justify-content: space-evenly;
+  padding: 1%;
+  justify-content: space-around;
 }
 #searchdiv > button {
   background-color: rgba(0, 0, 0, 0.801);
   color: white;
-  width: 15%;
+  width: 20%;
+  font-weight: bolder;
 }
 #searchdiv > button:hover {
   color: black;
   background-color: rgb(235, 235, 235);
-  border: 2px solid black;
+  border: 1px solid black;
   cursor: pointer;
 }
 #searchgroceries {
-  width: 85%;
+  width: 80%;
   padding: 5px;
   text-align: center;
-  border: 2px solid black;
-  margin-right: 5px;
+  border: 1px solid black;
   height: 40px;
 }
 
@@ -289,24 +326,23 @@ label {
   color: red;
   padding-bottom: 10px;
 }
-#form {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-}
+
 #logoutfridge {
-  height: 40px;
+  height: 3.7%;
   width: 24%;
   position: absolute;
-  top: 80px;
-  left: 460px;
+  top: 7.9%;
+  left: 46%;
   background-color: rgba(0, 0, 0, 0.507);
   border-radius: 5px;
-  text-align: center;
   color: white;
   text-shadow: 2px 2px 2px black;
   font-weight: bold;
   border-top: 4px solid transparent;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #logoutfridge:hover {
   background-color: rgb(0, 0, 0);
@@ -315,22 +351,113 @@ label {
   color: red;
   box-shadow: 0 0 15px red;
 }
+#formheading {
+  font-size: 1.5rem;
+  text-shadow: 1px 1px 5px black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-evenly;
+}
+#formheading > a {
+  padding-left: 6%;
+  padding-right: 6%;
+  text-decoration: none;
+  color: white;
+  width: 50%;
+  height: 100%;
+}
+#formheading > a:hover {
+  background-color: rgba(0, 0, 0, 0.678);
+  color: white;
+}
+#error {
+  text-shadow: 0px 0px 10px red;
+}
+.left {
+  background: rgb(2, 0, 36);
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(249, 0, 1, 0.6670869031206232) 29%,
+    rgba(253, 0, 0, 0.6586835417760855) 42%,
+    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgba(255, 0, 0, 0.14047625886292014) 71%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(249, 0, 1, 0.6670869031206232) 29%,
+    rgba(253, 0, 0, 0.6586835417760855) 42%,
+    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgba(255, 0, 0, 0.14047625886292014) 71%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(249, 0, 1, 0.6670869031206232) 29%,
+    rgba(253, 0, 0, 0.6586835417760855) 42%,
+    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgba(255, 0, 0, 0.14047625886292014) 71%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#ff0000",GradientType=1);
+}
+.right {
+  background: rgb(2, 0, 36);
+  background: -moz-linear-gradient(
+    270deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(249, 0, 1, 0.6670869031206232) 29%,
+    rgba(253, 0, 0, 0.6586835417760855) 42%,
+    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgba(255, 0, 0, 0.14047625886292014) 71%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  background: -webkit-linear-gradient(
+    270deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(249, 0, 1, 0.6670869031206232) 29%,
+    rgba(253, 0, 0, 0.6586835417760855) 42%,
+    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgba(255, 0, 0, 0.14047625886292014) 71%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  background: linear-gradient(
+    270deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(249, 0, 1, 0.6670869031206232) 29%,
+    rgba(253, 0, 0, 0.6586835417760855) 42%,
+    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgba(255, 0, 0, 0.14047625886292014) 71%,
+    rgba(255, 0, 0, 0) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#ff0000",GradientType=1);
+}
+#formlogin {
+  border-right: 3px solid black;
+}
+#formregister {
+  border-left: 3px solid black;
+}
+#form {
+  position: absolute;
+  top: 1%;
+  right: 2%;
+  width: 49%;
+}
 .box {
-  width: 440px;
-  padding: 20px;
+  width: 100%;
   text-align: center;
-  background: #191919a8;
-  border-radius: 30px;
+  color: black;
 }
 .box a {
-  color: white;
-  font-size: 30px;
+  color: black;
   display: inline-block;
   text-decoration: none;
-  margin-bottom: 20px;
 }
 .box a:hover {
-  color: gray;
   cursor: pointer;
 }
 .box input[type="text"],
@@ -339,32 +466,31 @@ label {
   background: none;
   display: block;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 5%;
+  margin-top: 2.5%;
   text-align: center;
-  border: 2px solid #3498db;
-  padding: 14px 10px;
-  width: 200px;
+  border: 2px solid black;
+  padding: 5%;
+  width: 70%;
   outline: none;
-  color: white;
-  border-radius: 24px;
+  color: black;
   transition: 0.25s;
 }
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
-  width: 280px;
+  width: 100%;
   border-color: #2ecc71;
 }
 .box input[type="button"] {
   border: 0;
   background: none;
   display: inline-block;
-  margin: 10px;
+  margin: 5%;
   text-align: center;
   border: 2px solid #2ecc71;
-  padding: 14px 40px;
+  padding: 5% 15%;
   outline: none;
-  color: white;
-  border-radius: 24px;
+  color: black;
   transition: 0.25s;
   cursor: pointer;
 }

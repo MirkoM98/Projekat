@@ -5,15 +5,14 @@ function changereg() {
   login.setAttribute("class", "hidden");
   email.removeAttribute("class");
   register.removeAttribute("class");
-  form_login.style.color = "darkgray";
-  form_register.style.color = "white";
   username.value = "";
   email.value = "";
   password.value = "";
   error.innerHTML = "";
-  username.style.borderColor = "#3498db";
-  email.style.borderColor = "#3498db";
-  password.style.borderColor = "#3498db";
+  form_login.removeAttribute("class");
+  form_register.setAttribute("class", "register");
+  formheading.setAttribute("class", "right");
+  black();
 }
 //promeni u login form
 var form_login = document.getElementById("formlogin");
@@ -22,10 +21,30 @@ function changelogin() {
   login.removeAttribute("class");
   email.setAttribute("class", "hidden");
   register.setAttribute("class", "hidden");
-  form_register.style.color = "darkgray";
-  form_login.style.color = "white";
+  form_register.removeAttribute("class");
+  form_login.setAttribute("class", "login");
+  formheading.setAttribute("class", "left");
+  black();
+  error.innerHTML = "";
 }
-
+function green(green) {
+  let x = green;
+  x.style.boxShadow = "0px 0px 10px green";
+  x.style.borderColor = "green";
+}
+function red(red) {
+  let y = red;
+  y.style.boxShadow = "0px 0px 10px red";
+  y.style.borderColor = "red";
+}
+function black() {
+  username.style.boxShadow = "";
+  email.style.boxShadow = "";
+  password.style.boxShadow = "";
+  username.style.borderColor = "black";
+  email.style.borderColor = "black";
+  password.style.borderColor = "black";
+}
 var username = document.getElementById("username");
 var email = document.getElementById("email");
 var password = document.getElementById("password");
@@ -45,7 +64,15 @@ var slot = document.getElementsByClassName("plus");
 var heading = document.getElementById("heading");
 var logoutopened = document.getElementById("logoutfridge");
 var form = document.getElementById("form");
-
+var fridge = document.getElementById("fridgeclosed");
+var fridgemain = document.getElementById("frizider");
+var formheading = document.getElementById("formheading");
+var imhungry = document.getElementById("imhungry");
+var getrecipes = document.getElementById("getrecipe");
+var checkboxes = document.querySelectorAll("input[type=checkbox]");
+var choose = document.getElementById("choose");
+var showrecipes = document.getElementById("showrecipe");
+formheading.setAttribute("class", "left");
 // LOGOUT
 var loggedin = JSON.parse(localStorage.getItem("logged_in"));
 logoutopened.addEventListener("click", logout);
@@ -63,13 +90,11 @@ function logout() {
     sessionStorage.clear();
     window.location.reload();
   }
-};
+}
 
 //LOGOVANJE
 login.addEventListener("click", function () {
   error.innerHTML = "";
-  username.style.borderColor = "red";
-  password.style.borderColor = "red";
   var name = username.value;
   var pass = password.value;
   var pulldata = getdata();
@@ -79,7 +104,7 @@ login.addEventListener("click", function () {
     usercheck = false;
   } else if (name == "") {
     error.innerHTML += `Username field empty!<br>`;
-    username.style.borderColor = "red";
+    red(username);
     usercheck = false;
   } else {
     for (i = 0; i < pulldata.length; i++)
@@ -88,8 +113,6 @@ login.addEventListener("click", function () {
           loggeduser.name = name;
           loggeduser.password = pass;
           sessionStorage.setItem("logged_in", JSON.stringify(loggeduser));
-          error.innerHTML = `Welcome ${name}!`;
-          error.style.color = "lime";
           login.setAttribute("class", "hidden");
           username.setAttribute("class", "hidden");
           password.setAttribute("class", "hidden");
@@ -98,26 +121,23 @@ login.addEventListener("click", function () {
           username.style.borderColor = "lime";
           form_login.removeEventListener("click", changelogin);
           form_register.removeEventListener("click", changereg);
-          document
-            .getElementById("formheading")
-            .setAttribute("class", "hidden");
-          error.style.fontSize = "40px";
+          document.getElementById("formheading");
+          formheading.setAttribute("class", "hidden");
           error.innerHTML = `Welcome ${loggeduser.name}!`;
           error.style.color = "lime";
+          error.style.fontWeight = "bolder";
           login.setAttribute("class", "hidden");
           username.setAttribute("class", "hidden");
           password.setAttribute("class", "hidden");
           logoutclosed.removeAttribute("class");
           openfridge.removeAttribute("class");
-          document
-            .getElementById("formheading")
-            .setAttribute("class", "hidden");
-          error.style.fontSize = "40px";
-
+          error.style.textShadow = "0px 0px 25px darkgreen";
           return;
         } else if (pulldata[i].name == name && pulldata[i].password != pass) {
           username.style.borderColor = "lime";
-          password.style.borderColor = "red";
+          error.style.textShadow = "0px 0px 25px red";
+          green(username);
+          red(password);
           error.style.color = "red";
           error.innerHTML = "Wrong password!";
           return;
@@ -140,26 +160,26 @@ register.addEventListener("click", function () {
   var pass = password.value;
   error.innerHTML = "";
   error.style.color = "red";
-
+  black();
   //proveri username
   if (name == "") {
     error.innerHTML += `Username field empty!<br>`;
-    username.style.borderColor = "red";
+    red(username);
     var namecheck = false;
   } else if (name.length < 3) {
     error.innerHTML += `Username too short! (minimum 3 letters)<br>`;
-    username.style.borderColor = "red";
+    red(username);
     var namecheck = false;
   } else if (name.length > 15) {
     error.innerHTML += `Username too long! (maximum 15 letters)<br>`;
-    username.style.borderColor = "red";
+    red(username);
     var namecheck = false;
   } else if (name.includes(" ")) {
     error.innerHTML += `Username musn't contain a space!<br>`;
-    username.style.borderColor = "red";
+    red(username);
     var namecheck = false;
   } else {
-    username.style.borderColor = "lime";
+    green(username);
     var namecheck = true;
   }
   var userdata = getdata();
@@ -167,7 +187,7 @@ register.addEventListener("click", function () {
     for (i = 0; i < userdata.length; i++) {
       if (userdata[i].name == name) {
         error.innerHTML += `Username taken!<br>`;
-        username.style.borderColor = "red";
+        red(username);
         var namecheck = false;
       }
     }
@@ -175,7 +195,7 @@ register.addEventListener("click", function () {
   //proveri email
   if (mail == "") {
     error.innerHTML += `Email field empty!<br>`;
-    email.style.borderColor = "red";
+    red(email);
     var mailcheck = false;
   } else if (
     mail.includes("@") == false ||
@@ -183,10 +203,10 @@ register.addEventListener("click", function () {
     mail.includes(" ")
   ) {
     error.innerHTML += `Email format not correct!<br>`;
-    email.style.borderColor = "red";
+    red(email);
     var mailcheck = false;
   } else {
-    email.style.borderColor = "lime";
+    green(email);
     var mailcheck = true;
   }
   //proveri password
@@ -210,20 +230,20 @@ register.addEventListener("click", function () {
   }
   if (pass == "") {
     error.innerHTML += `Password field empty!<br>`;
-    password.style.borderColor = "red";
+    red(password);
     var passwordcheck = false;
   } else if (pass.includes(" ")) {
     error.innerHTML += `Password musn't contain a space!<br>`;
-    password.style.borderColor = "red";
+    red(password);
   } else if (pass.length < 8) {
     error.innerHTML += `Password less than 8 characters!<br>`;
-    password.style.borderColor = "red";
+    red(password);
   } else if (number == 0 || capitalletter == 0 || smallletter == 0) {
     error.innerHTML += `Password must contain at least 1: number, capital letter, small letter!<br>`;
     var passwordcheck = false;
   } else {
     var passwordcheck = true;
-    password.style.borderColor = "lime";
+    green(password);
   }
 
   //proveri formu i ubaci korisnika u storage
@@ -237,7 +257,6 @@ register.addEventListener("click", function () {
         name: "",
         image: "",
       };
-
       user.groceries.push(entry);
     }
     if (userdata != null) {
@@ -247,12 +266,14 @@ register.addEventListener("click", function () {
       users.push(user);
       store = JSON.stringify(users);
     }
+    green(username);
+    green(password);
     localStorage.setItem("users", store);
     changelogin();
     password.value = "";
     error.innerHTML = `Success! Please log in`;
     error.style.color = "lime";
-    // buildstorage();
+    error.style.textShadow = "0px 0px 25px green";
   }
 });
 
@@ -261,7 +282,6 @@ openfridge.addEventListener("click", openthefridge);
 function openthefridge() {
   logoutfridge.removeAttribute("class");
   form.setAttribute("class", "form hidden");
-  
   var showrecipes = document.getElementById("showrecipe");
   showrecipes.setAttribute("class", "hidden");
   var getloggeduser = sessionStorage.getItem("logged_in");
@@ -270,23 +290,15 @@ function openthefridge() {
   var getusers = JSON.parse(localStorage.getItem("users"));
   var existingusers = getusers.find((x) => x.name === `${getloggedname}`);
   var groceries = existingusers.groceries;
-  form.style.position = "fixed";
-  form.style.top = "0";
-  form.style.right = "0";
-  error.style.display = "inline-block";
-  error.style.padding = "20px";
   logoutopened.innerHTML = `Logged in: ${getloggedname}`;
-  logoutopened.addEventListener("mouseenter", function(){
+  logoutopened.addEventListener("mouseenter", function () {
     logoutopened.innerHTML = "Click to logout";
   });
-  logoutopened.addEventListener("mouseleave", function() {
+  logoutopened.addEventListener("mouseleave", function () {
     logoutopened.innerHTML = `Logged in: ${getloggedname}`;
   });
-
   openfridge.setAttribute("class", "hidden");
-  var fridge = document.getElementById("fridgeclosed");
   fridge.setAttribute("src", "Images/open.png");
-
   heading.setAttribute("class", "hidden");
   plusmap.removeAttribute("class");
   var background = document.getElementById("main");
@@ -303,20 +315,26 @@ function openthefridge() {
       var parsetop = parseInt(top, 10);
       var left = slot[i].style.left;
       var parseleft = parseInt(left, 10);
-      if (parsetop >= 400) {
-        items.style.top = `${450}px`;
-        items.style.left = `${parseleft + 50}px`;
-      } else {
-        items.style.top = `${parsetop + 50}px`;
-        items.style.left = `${parseleft + 50}px`;
-      }
+      items.style.top = `${parsetop + 50}px`;
+      items.style.left = `${parseleft + 50}px`;
+      items.removeAttribute("class");
       returni = function () {
         return i;
       };
-
-      items.removeAttribute("class");
       event.stopPropagation();
+      // moveitems();
     });
+    // function moveitems(){
+    //   var bounding = items.getBoundingClientRect();
+    //   console.log(bounding.right, bounding.bottom);
+    //   if (bounding.right > width) {
+    //     items.style.left - (bounding.right - width);
+    //   } else if (bounding.bottom > width) {
+    //     items.style.top - (bounding.bottom - width);
+    //   } else {
+
+    //   }
+    // }
   }
   background.addEventListener("click", function () {
     items.setAttribute("class", "hidden");
@@ -378,7 +396,6 @@ function openthefridge() {
               var food = document.createElement("div");
               food.addEventListener("click", additem);
               food.setAttribute("id", "food");
-
               food.innerHTML = `<img src="https://spoonacular.com/cdn/ingredients_100x100/${items[i].image}"><div class="searchp"><p>${items[i].name}</p></div>`;
 
               displaygroceries.appendChild(food);
@@ -403,12 +420,7 @@ function openthefridge() {
       }
     });
 
-  var imhungry = document.getElementById("imhungry");
-  var getrecipes = document.getElementById("getrecipe");
-  var checkboxes = document.querySelectorAll("input[type=checkbox]");
-  var choose = document.getElementById("choose");
   imhungry.addEventListener("click", hungry);
-  var showrecipes = document.getElementById("showrecipe");
 
   function hungry() {
     getrecipes.removeAttribute("class");
@@ -428,7 +440,8 @@ function openthefridge() {
   }
   getrecipes.addEventListener("click", recipes);
   function recipes() {
-    showrecipes.innerHTML = "<div id='searching'><img src='Images/6.gif'></div>";
+    showrecipes.innerHTML =
+      "<div id='searching'><img src='Images/6.gif'></div>";
     heading.innerHTML = "<p>Instructions are shown here!</p>";
     heading.removeAttribute("class");
     imhungry.removeAttribute("class");
@@ -464,7 +477,7 @@ function openthefridge() {
       .then((response) => response.json())
       .then((data) => {
         var recipes = data;
-        
+
         showrecipes.innerHTML = "";
         for (let i = 0; i < recipes.length; i++) {
           var recipe = document.createElement("div");
@@ -498,5 +511,44 @@ function openthefridge() {
           });
         }
       });
+  }
+}
+
+var width = window.innerWidth > 0 ? window.innerWidth : screen.width;
+
+if (width < 1000) {
+  fridge.style.width = `${width}px`;
+  fridgemain.style.width = `${width}px`;
+  var newwidth = 1000 - width;
+  var result = (newwidth * 100) / 1000;
+  var reduceby = result / 100;
+  for (let i = 0; i < slot.length; i++) {
+    var top2 = slot[i].style.top;
+    var parsetop = parseInt(top2, 10);
+    var left = slot[i].style.left;
+    var parseleft = parseInt(left, 10);
+    var size = 45 - reduceby * 45;
+    slot[i].style.width = `${size}px`;
+    slot[i].style.height = `${size}px`;
+    parsetop = parsetop - reduceby * parsetop;
+    parseleft = parseleft - reduceby * parseleft;
+    slot[i].style.top = `${parsetop}px`;
+    slot[i].style.left = `${parseleft}px`;
+  }
+  console.log(width);
+  if (width < 700) {
+    document.getElementById("h2").style.fontSize = "1.1rem";
+    document.getElementById("h2span").style.fontSize = "1.2rem";
+    form_login.style.fontSize = "1.1rem";
+    form_register.style.fontSize = "1.1rem";
+    error.style.fontSize = "1rem";
+  }
+  if (width < 600) {
+    for (let i = 0; i < slot.length; i++) {
+      slot[i].style.fontSize = "1rem";
+    }
+    imhungry.style.fontSize = "0.5rem";
+    getrecipes.style.fontSize = "0.5rem";
+    logoutfridge.style.fontSize = "0.5rem";
   }
 }
