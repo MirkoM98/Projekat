@@ -6,7 +6,6 @@ html {
 }
 body {
   font-size: 1.6rem;
-  
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   background: #7d7e7d; /* Old browsers */
@@ -29,12 +28,15 @@ body {
   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 );
 }
+.hidden {
+  display: none !important;
+}
 #main {
   width: 100%;
   text-align: right;
   height: auto;
 }
-#frizider {
+#fridge {
   position: relative;
   margin: 0 auto;
 }
@@ -67,10 +69,8 @@ body {
 #heading > h2 > span {
   font-size: 1.8rem;
   text-decoration: underline;
-
   text-shadow: 0 0 30px white;
 }
-
 #showrecipesmenu {
   display: flex;
   border-bottom: 1px solid black;
@@ -96,6 +96,9 @@ body {
   text-shadow: 1px 1px 40px black;
   padding: 10px;
 }
+
+/* UNUTAR FRIZIDERA */
+
 #openfridge {
   height: 56.5%;
   width: 12%;
@@ -104,9 +107,7 @@ body {
   left: 37.5%;
   cursor: pointer;
 }
-
 #openfridge:hover {
-  
   background: linear-gradient(
     90deg,
     rgba(253, 0, 0, 0) 0%,
@@ -122,20 +123,6 @@ body {
   margin: 15px 25px;
   padding-top: 10px;
 }
-.select {
-  color: white;
-}
-.notselect {
-  color: darkgrey;
-}
-.hidden {
-  display: none !important;
-}
-
-#formregister {
-  color: darkgrey;
-}
-/* FORM */
 .plus {
   display: flex;
   align-items: center;
@@ -176,7 +163,7 @@ body {
   text-align: center;
   color: white;
   text-shadow: 3px 3px 3px black;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 #showrecipe {
   width: 49%;
@@ -196,7 +183,6 @@ label {
   height: 100%;
   width: 100%;
 }
-
 :checked + .shad {
   border: 5px solid rgba(255, 0, 0, 0.76);
   box-shadow: 0 0 20px red;
@@ -211,7 +197,6 @@ label {
 .shad > img {
   background-color: white;
 }
-
 #searching {
   width: 100%;
   text-align: center;
@@ -236,6 +221,7 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-shadow: 2px 2px 3px black;
 }
 #getrecipe {
   top: 9%;
@@ -244,7 +230,6 @@ label {
   width: 18%;
   height: 5.5%;
   background-color: rgba(0, 0, 0, 0.5);
-
   border-radius: 50px;
   line-height: 250%;
   color: rgb(255, 255, 255);
@@ -255,6 +240,7 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-shadow: 2px 2px 3px black;
 }
 #imhungry:hover,
 #getrecipe:hover {
@@ -266,7 +252,6 @@ label {
 }
 #items {
   width: 30%;
-  height: 80vh;
   background-color: rgba(255, 255, 255, 0.726);
   position: absolute;
   text-align: center;
@@ -298,7 +283,6 @@ label {
   border: 1px solid black;
   height: 40px;
 }
-
 #groceries > * {
   display: flex;
   justify-content: space-evenly;
@@ -322,11 +306,12 @@ label {
   background-color: rgba(169, 169, 169, 0.616);
   cursor: pointer;
 }
+/* ZATVOREN FRIZIDER */
 #error {
   color: red;
   padding-bottom: 10px;
+  text-shadow: 0px 0px 10px red;
 }
-
 #logoutfridge {
   height: 3.7%;
   width: 24%;
@@ -357,6 +342,8 @@ label {
   border-radius: 5px;
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 10px;
+  width: 95%;
 }
 #formheading > a {
   padding-left: 6%;
@@ -365,40 +352,48 @@ label {
   color: white;
   width: 50%;
   height: 100%;
+  padding-bottom: 10px;
+  padding-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #formheading > a:hover {
   background-color: rgba(0, 0, 0, 0.678);
   color: white;
 }
-#error {
-  text-shadow: 0px 0px 10px red;
-}
 .left {
   background: rgb(2, 0, 36);
   background: -moz-linear-gradient(
     90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(249, 0, 1, 0.6670869031206232) 29%,
-    rgba(253, 0, 0, 0.6586835417760855) 42%,
-    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgb(216, 0, 0) 0%,
+    rgba(216, 0, 0, 0.596) 40%,
+    rgba(216, 0, 0, 0.596) 49%,
+    rgb(0, 0, 0) 50%,
+    rgba(207, 0, 0, 0.192) 51%,
+    rgba(207, 0, 0, 0.192) 60%,
     rgba(255, 0, 0, 0.14047625886292014) 71%,
     rgba(255, 0, 0, 0) 100%
   );
   background: -webkit-linear-gradient(
     90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(249, 0, 1, 0.6670869031206232) 29%,
-    rgba(253, 0, 0, 0.6586835417760855) 42%,
-    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgb(216, 0, 0) 0%,
+    rgba(216, 0, 0, 0.596) 40%,
+    rgba(216, 0, 0, 0.596) 49%,
+    rgb(0, 0, 0) 50%,
+    rgba(207, 0, 0, 0.192) 51%,
+    rgba(207, 0, 0, 0.192) 60%,
     rgba(255, 0, 0, 0.14047625886292014) 71%,
     rgba(255, 0, 0, 0) 100%
   );
   background: linear-gradient(
     90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(249, 0, 1, 0.6670869031206232) 29%,
-    rgba(253, 0, 0, 0.6586835417760855) 42%,
-    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgb(216, 0, 0) 0%,
+    rgba(216, 0, 0, 0.596) 40%,
+    rgba(216, 0, 0, 0.596) 49%,
+    rgb(0, 0, 0) 50%,
+    rgba(207, 0, 0, 0.192) 51%,
+    rgba(207, 0, 0, 0.192) 60%,
     rgba(255, 0, 0, 0.14047625886292014) 71%,
     rgba(255, 0, 0, 0) 100%
   );
@@ -408,38 +403,38 @@ label {
   background: rgb(2, 0, 36);
   background: -moz-linear-gradient(
     270deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(249, 0, 1, 0.6670869031206232) 29%,
-    rgba(253, 0, 0, 0.6586835417760855) 42%,
-    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgb(216, 0, 0) 0%,
+    rgba(216, 0, 0, 0.596) 40%,
+    rgba(216, 0, 0, 0.596) 49%,
+    rgb(0, 0, 0) 50%,
+    rgba(207, 0, 0, 0.192) 51%,
+    rgba(207, 0, 0, 0.192) 60%,
     rgba(255, 0, 0, 0.14047625886292014) 71%,
     rgba(255, 0, 0, 0) 100%
   );
   background: -webkit-linear-gradient(
     270deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(249, 0, 1, 0.6670869031206232) 29%,
-    rgba(253, 0, 0, 0.6586835417760855) 42%,
-    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgb(216, 0, 0) 0%,
+    rgba(216, 0, 0, 0.596) 40%,
+    rgba(216, 0, 0, 0.596) 49%,
+    rgb(0, 0, 0) 50%,
+    rgba(207, 0, 0, 0.192) 51%,
+    rgba(207, 0, 0, 0.192) 60%,
     rgba(255, 0, 0, 0.14047625886292014) 71%,
     rgba(255, 0, 0, 0) 100%
   );
   background: linear-gradient(
     270deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(249, 0, 1, 0.6670869031206232) 29%,
-    rgba(253, 0, 0, 0.6586835417760855) 42%,
-    rgba(255, 0, 0, 0.19089642693014708) 51%,
+    rgb(216, 0, 0) 0%,
+    rgba(216, 0, 0, 0.596) 40%,
+    rgba(216, 0, 0, 0.596) 49%,
+    rgb(0, 0, 0) 50%,
+    rgba(207, 0, 0, 0.192) 51%,
+    rgba(207, 0, 0, 0.192) 60%,
     rgba(255, 0, 0, 0.14047625886292014) 71%,
     rgba(255, 0, 0, 0) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#ff0000",GradientType=1);
-}
-#formlogin {
-  border-right: 3px solid black;
-}
-#formregister {
-  border-left: 3px solid black;
 }
 #form {
   position: absolute;
@@ -478,7 +473,7 @@ label {
 }
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
-  width: 100%;
+  width: 90%;
   border-color: #2ecc71;
 }
 .box input[type="button"] {

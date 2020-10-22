@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="main">
-      <div id="frizider" style="width: 1000px">
+      <div id="fridge" style="width: 1000px">
         <img
           src="images/closed.png"
           alt=""
@@ -176,11 +176,11 @@
         </div>
         <div id="heading">
           <h2 id="h2">
-            Welcome to your own<br /><span id="h2span">VirtualFridge!</span><br />
+            Welcome to your own<br /><span id="h2span">VirtualFridge!</span
+            ><br />
             Save your ingredients and make tasty meals with online recipes!
           </h2>
         </div>
-
         <div id="form" class="form">
           <form class="box" action="index.html" method="post">
             <div id="formheading">
@@ -188,32 +188,36 @@
               ><a href="#" id="formregister">Register</a>
             </div>
             <div id="error"></div>
-            <input type="text" name="" placeholder="Username" id="username" />
             <input
               type="text"
-              name=""
+              name="username"
+              placeholder="Username"
+              id="username"
+            />
+            <input
+              type="text"
+              name="email"
               placeholder="E-mail"
               id="email"
               class="hidden"
             />
             <input
               type="password"
-              name=""
+              name="password"
               placeholder="Password"
               id="password"
             />
-            <input type="button" name="" value="Login" id="login" />
+            <input type="button" name="login" value="Login" id="login" />
             <input
               type="button"
-              name=""
+              name="hidden"
               value="Register"
               id="register"
               class="hidden"
             />
-
             <input
               type="button"
-              name=""
+              name="hidden"
               value="Logout"
               id="logout"
               class="hidden"
@@ -222,7 +226,6 @@
         </div>
       </div>
     </div>
-
-    <script async src="script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
