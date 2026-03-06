@@ -10,7 +10,7 @@ Kada korisnik izabere jelo dobija upustvo (ako postoji za to jelo) kako da napra
 
 Koriscen je vanila Javascript bez dodatnih biblioteka i framework-a.
 
-
+Aplikacija: https://virtual-fridge-3ac8e.web.app/#
 
 
 
